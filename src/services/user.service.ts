@@ -1,12 +1,21 @@
-import { get } from "http";
 import getConnection from "../config/db";
-const handleCreateUser = (data: {
+const handleCreateUser = async (data: {
   name: string;
   email: string;
-  password: string;
+  address: string;
 }) => {
-  // Logic to handle user creation
-  console.log("User data received:", data);
+  const connection = await getConnection();
+
+  try {
+    const sql =
+      "INSERT INTO `users`(`name`, `email`, `address`) VALUES (?, ?, ?)";
+    const values = [data.name, data.email, data.address];
+    const [result, fields] = await connection.execute(sql, values);
+    return result;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return [];
+  }
 };
 
 const getAllUser = async () => {
