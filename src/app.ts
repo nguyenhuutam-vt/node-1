@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import webRoutes from "./routes/web";
+import initDatabase from "config/seed";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -20,6 +21,9 @@ webRoutes(app);
 app.use(express.static("public"));
 
 //start server
+
+//seeding data
+initDatabase();
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

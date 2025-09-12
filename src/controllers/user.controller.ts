@@ -12,12 +12,12 @@ const getHomePage = async (req: Request, res: Response) => {
 };
 
 const getUserPage = (req: Request, res: Response) => {
-  return res.render("create-user");
+  return res.render("admin/user/create");
 };
 
 const postUser = async (req: Request, res: Response) => {
   await handleCreateUser(req.body);
-  return res.redirect("/");
+  return res.redirect("/admin/user");
 };
 
 const postDeleteUser = async (req: Request, res: Response) => {
