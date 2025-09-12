@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  getAllRole,
   getAllUser,
   getUserById,
   handleCreateUser,
@@ -11,12 +12,15 @@ const getHomePage = async (req: Request, res: Response) => {
   return res.render("home", { users: users });
 };
 
-const getUserPage = (req: Request, res: Response) => {
-  return res.render("admin/user/create");
+const getUserPage = async (req: Request, res: Response) => {
+  const roles = await getAllRole();
+  return res.render("admin/user/create", { roles });
 };
 
 const postUser = async (req: Request, res: Response) => {
-  await handleCreateUser(req.body);
+  const file = req.file;
+  const avatar = file?.filename ?? "";
+  await handleCreateUser({ ...req.body, avatar });
   return res.redirect("/admin/user");
 };
 
