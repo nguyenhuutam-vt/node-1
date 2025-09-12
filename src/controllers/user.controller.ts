@@ -28,13 +28,13 @@ const postDeleteUser = async (req: Request, res: Response) => {
 
 const getViewUserPage = async (req: Request, res: Response) => {
   const userId = req.params.id;
-  const user = await getUserById(userId);
+  const user = await getUserById(Number(userId));
   return res.render("view-user", { user });
 };
 
 const getEditUserPage = async (req: Request, res: Response) => {
   const userId = req.params.id;
-  const user = await getUserById(userId);
+  const user = await getUserById(Number(userId));
   return res.render("edit-user", { user });
 };
 
