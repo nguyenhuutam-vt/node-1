@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Details</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .user-details {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        padding: 32px 40px;
+        margin-top: 48px;
+        min-width: 320px;
+        max-width: 400px;
+      }
+      h1 {
+        color: #2d3a4b;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      p {
+        font-size: 1.1rem;
+        color: #444;
+        margin: 12px 0;
+      }
+      strong {
+        color: #2d3a4b;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 24px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 1rem;
+        margin-top: 24px;
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="user-details">
+      <h1>User Details</h1>
+      <p><strong>ID:</strong> <%= user.id %></p>
+      <p><strong>Name:</strong> <%= user.name %></p>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <p><strong>Address:</strong> <%= user.address %></p>
+      <a href="/" class="btn">Back to User List</a>
+    </div>
+  </body>
+</html>

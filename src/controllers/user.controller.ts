@@ -1,5 +1,11 @@
 import { Request, Response } from "express";
-import { getAllUser, handleCreateUser } from "services/user.service";
+import {
+  getAllUser,
+  getUserById,
+  handleCreateUser,
+  handleDeleteUser,
+  handleUpdateUser,
+} from "services/user.service";
 const getHomePage = async (req: Request, res: Response) => {
   const users = await getAllUser();
   return res.render("home", { users: users });
@@ -14,4 +20,36 @@ const postUser = async (req: Request, res: Response) => {
   return res.redirect("/");
 };
 
-export { getHomePage, getUserPage, postUser };
+const postDeleteUser = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  await handleDeleteUser(userId);
+  return res.redirect("/");
+};
+
+const getViewUserPage = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const user = await getUserById(userId);
+  return res.render("view-user", { user });
+};
+
+const getEditUserPage = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const user = await getUserById(userId);
+  return res.render("edit-user", { user });
+};
+
+const postUpdateUser = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  await handleUpdateUser(userId, req.body);
+  return res.redirect("/");
+};
+
+export {
+  getHomePage,
+  getUserPage,
+  postUser,
+  postUpdateUser,
+  postDeleteUser,
+  getViewUserPage,
+  getEditUserPage,
+};

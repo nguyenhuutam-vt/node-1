@@ -41,14 +41,24 @@
             <td><%= user.email %></td>
             <td><%= user.address %></td>
             <td>
-              <a href="/edit-user/<%= user.id %>" class="btn btn-warning btn-sm"
-                >Edit</a
-              >
-              <a
-                href="/delete-user/<%= user.id %>"
-                class="btn btn-danger btn-sm"
-                >Delete</a
-              >
+              <div style="display: flex; gap: 10px">
+                <form action="/view-user/<%= user.id %>" method="GET">
+                  <button type="submit" class="btn btn-warning btn-sm">
+                    View
+                  </button>
+                </form>
+                <form action="/edit-user/<%= user.id %>" method="GET">
+                  <button type="submit" class="btn btn-success btn-sm">
+                    Edit
+                  </button>
+                </form>
+
+                <form action="/delete-user/<%= user.id %>" method="POST">
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
+                </form>
+              </div>
             </td>
           </tr>
           <% }); %> <% } else { %>

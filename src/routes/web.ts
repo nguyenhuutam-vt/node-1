@@ -1,8 +1,11 @@
 import express, { Express } from "express";
-import { get } from "http";
 import {
+  getEditUserPage,
   getHomePage,
   getUserPage,
+  getViewUserPage,
+  postDeleteUser,
+  postUpdateUser,
   postUser,
 } from "../controllers/user.controller";
 
@@ -13,7 +16,11 @@ const webRoutes = (app: Express) => {
 
   router.get("/create-user", getUserPage);
   router.post("/create-user", postUser);
-
+  router.post("/delete-user/:id", postDeleteUser);
+  router.get("/view-user/:id", getViewUserPage);
+  //update
+  router.get("/edit-user/:id", getEditUserPage);
+  router.post("/edit-user/:id", postUpdateUser);
   app.use("/", router);
 };
 
