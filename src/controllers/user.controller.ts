@@ -27,25 +27,29 @@ const postUser = async (req: Request, res: Response) => {
 const postDeleteUser = async (req: Request, res: Response) => {
   const userId = req.params.id;
   await handleDeleteUser(userId);
-  return res.redirect("/");
+  return res.redirect("/admin/user");
 };
 
 const getViewUserPage = async (req: Request, res: Response) => {
   const userId = req.params.id;
   const user = await getUserById(Number(userId));
-  return res.render("view-user", { user });
+  return res.render("admin/user/detail", { user });
 };
 
 const getEditUserPage = async (req: Request, res: Response) => {
   const userId = req.params.id;
   const user = await getUserById(Number(userId));
-  return res.render("edit-user", { user });
+  const roles = await getAllRole();
+
+  return res.render("admin/user/edit", { roles, user });
 };
 
 const postUpdateUser = async (req: Request, res: Response) => {
   const userId = req.params.id;
-  await handleUpdateUser(userId, req.body);
-  return res.redirect("/");
+  const file = req.file;
+  const avatar = file?.filename ?? null;
+  await handleUpdateUser(userId, { ...req.body, avatar });
+  return res.redirect("/admin/user");
 };
 
 export {

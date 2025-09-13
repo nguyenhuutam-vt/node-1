@@ -1,4 +1,6 @@
+import { hashPassword } from "services/user.service";
 import { prisma } from "./client";
+import { ACCOUNT_TYPE } from "./constant";
 
 const initDatabase = async () => {
   const countUsers = await prisma.user.count();
@@ -14,25 +16,35 @@ const initDatabase = async () => {
   }
 
   if (countUsers === 0) {
-    await prisma.user.createMany({
-      data: [
-        {
-          fullName: "John Doe",
-          username: "johndoe",
-          password: "password",
-          address: "123 Main St",
-          accountType: "USER",
-        },
-        {
-          fullName: "Jane Smith",
-          username: "janesmith",
-          password: "password",
-          address: "456 Oak Ave",
-          accountType: "ADMIN",
-        },
-      ],
+    const defaultPassword = await hashPassword("123456");
+    const adminRole = await prisma.role.findFirst({
+      where: { name: "ADMIN" },
     });
-  } else {
+    const adminRoleId = adminRole ? adminRole.id : undefined;
+    if (adminRoleId) {
+      await prisma.user.createMany({
+        data: [
+          {
+            fullName: "John Doe",
+            username: "johndoe",
+            password: defaultPassword,
+            address: "123 Main St",
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            roleId: adminRoleId,
+          },
+          {
+            fullName: "Jane Smith",
+            username: "janesmith",
+            password: defaultPassword,
+            address: "456 Oak Ave",
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            roleId: adminRoleId,
+          },
+        ],
+      });
+    }
+  }
+  if (countUsers !== 0 || countRole !== 0) {
     console.log("Database already seeded");
   }
 };

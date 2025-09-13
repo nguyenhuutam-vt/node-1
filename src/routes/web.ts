@@ -36,6 +36,10 @@ const webRoutes = (app: Express) => {
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/order", getAdminOrderPage);
   router.get("/admin/product", getAdminProductPage);
+  router.post("/admin/delete-user/:id", postDeleteUser);
+  router.get("/admin/view-user/:id", getViewUserPage);
+  router.get("/admin/edit-user/:id", getEditUserPage);
+  router.post("/admin/edit-user/:id",fileUploadMiddleware("avatar"), postUpdateUser);
 };
 
 export default webRoutes;
