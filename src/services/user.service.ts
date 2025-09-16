@@ -92,6 +92,28 @@ const handleUpdateUser = async (
   return editedUser;
 };
 
+//product
+// const handleCreateProduct = async (data: {
+//   name: string;
+//   price: number;
+//   detailDesc: string;
+//   shortDesc: string;
+//   quantity: number;
+//   image: string;
+// }) => {
+//   const newProduct = await prisma.product.create({
+//     data: {
+//       name: data.name,
+//       price: data.price,
+//       detailDesc: data.detailDesc,
+//       shortDesc: data.shortDesc,
+//       quantity: data.quantity,
+//       image: data.image,
+//     },
+//   });
+//   return newProduct;
+// };
+
 export {
   handleCreateUser,
   getAllUser,
@@ -100,4 +122,5 @@ export {
   handleUpdateUser,
   getAllRole,
   hashPassword,
+  // handleCreateProduct,
 };

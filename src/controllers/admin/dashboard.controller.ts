@@ -19,9 +19,14 @@ const getAdminProductPage = async (req: Request, res: Response) => {
   return res.render("admin/product/show");
 };
 
+const getAdminCreateProductPage = async (req: Request, res: Response) => {
+  return res.render("admin/product/create.ejs");
+};
+
 export {
   getDashBoardPage,
   getAdminUserPage,
   getAdminOrderPage,
   getAdminProductPage,
+  getAdminCreateProductPage,
 };
