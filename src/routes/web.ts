@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import {
   getEditUserPage,
   getHomePage,
+  getProductPage,
   getUserPage,
   getViewUserPage,
   postDeleteUser,
@@ -39,7 +40,14 @@ const webRoutes = (app: Express) => {
   router.post("/admin/delete-user/:id", postDeleteUser);
   router.get("/admin/view-user/:id", getViewUserPage);
   router.get("/admin/edit-user/:id", getEditUserPage);
-  router.post("/admin/edit-user/:id",fileUploadMiddleware("avatar"), postUpdateUser);
+  router.post(
+    "/admin/edit-user/:id",
+    fileUploadMiddleware("avatar"),
+    postUpdateUser
+  );
+
+  //client
+  router.get("/product/:id", getProductPage);
 };
 
 export default webRoutes;

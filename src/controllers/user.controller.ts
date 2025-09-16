@@ -8,8 +8,8 @@ import {
   handleUpdateUser,
 } from "services/user.service";
 const getHomePage = async (req: Request, res: Response) => {
-  const users = await getAllUser();
-  return res.render("home", { users: users });
+  // const users = await getAllUser();
+  return res.render("clinet/home/show.ejs" /*, { users }*/);
 };
 
 const getUserPage = async (req: Request, res: Response) => {
@@ -52,6 +52,10 @@ const postUpdateUser = async (req: Request, res: Response) => {
   return res.redirect("/admin/user");
 };
 
+const getProductPage = async (req: Request, res: Response) => {
+  return res.render("clinet/product/detail.ejs");
+};
+
 export {
   getHomePage,
   getUserPage,
@@ -60,4 +64,5 @@ export {
   postDeleteUser,
   getViewUserPage,
   getEditUserPage,
+  getProductPage,
 };
