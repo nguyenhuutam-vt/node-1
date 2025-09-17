@@ -7,7 +7,7 @@ const hashPassword = async (password: string) => {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   return hashedPassword;
 };
-
+//user
 const handleCreateUser = async (data: {
   fullName: string;
   username: string;
@@ -93,26 +93,47 @@ const handleUpdateUser = async (
 };
 
 //product
-// const handleCreateProduct = async (data: {
-//   name: string;
-//   price: number;
-//   detailDesc: string;
-//   shortDesc: string;
-//   quantity: number;
-//   image: string;
-// }) => {
-//   const newProduct = await prisma.product.create({
-//     data: {
-//       name: data.name,
-//       price: data.price,
-//       detailDesc: data.detailDesc,
-//       shortDesc: data.shortDesc,
-//       quantity: data.quantity,
-//       image: data.image,
-//     },
-//   });
-//   return newProduct;
-// };
+const handleCreateProduct = async (data: {
+  name: string;
+  price: number;
+  avatar: string;
+  detailDesc: string;
+  shortDesc: string;
+  quantity: number;
+  // sold: number;
+  factory: string;
+  target: string;
+}) => {
+  const newProduct = await prisma.product.create({
+    data: {
+      name: data.name,
+      price: Number(data.price),
+      image: data.avatar,
+      detailDesc: data.detailDesc,
+      shortDesc: data.shortDesc,
+      quantity: Number(data.quantity),
+      // sold: Number(data.sold),
+      factory: data.factory,
+      target: data.target,
+    },
+  });
+  return newProduct;
+};
+
+const getAllProduct = async () => {
+  // Logic to get user by ID
+  const products = await prisma.product.findMany(); //finadMany lay ra tat ca user
+  return products;
+};
+
+const getProductById = async (productId: number) => {
+  const product = await prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
+  return product;
+};
 
 export {
   handleCreateUser,
@@ -122,5 +143,7 @@ export {
   handleUpdateUser,
   getAllRole,
   hashPassword,
-  // handleCreateProduct,
+  handleCreateProduct,
+  getAllProduct,
+  getProductById,
 };

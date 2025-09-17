@@ -56,8 +56,6 @@ const getProductPage = async (req: Request, res: Response) => {
   return res.render("clinet/product/detail.ejs");
 };
 
-
-
 export {
   getHomePage,
   getUserPage,

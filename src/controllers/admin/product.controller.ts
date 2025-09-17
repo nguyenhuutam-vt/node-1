@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { getProductById, handleCreateProduct } from "services/user.service";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
 // import { handleCreateProduct } from "services/user.service";
 
@@ -38,8 +39,17 @@ const postProduct = async (req: Request, res: Response) => {
     });
   }
 
-  //   await handleCreateProduct({ ...req.body, image });
+  const file = req.file;
+  const avatar = file?.filename ?? "";
+  await handleCreateProduct({ ...req.body, avatar });
   return res.redirect("/admin/product");
 };
 
-export { postProduct, getAdminCreateProductPage };
+
+const getViewProductPage = async (req: Request, res: Response) => {
+  const productId = req.params.id;
+  const product = await getProductById(Number(productId));
+  return res.render("admin/product/detail", { product });
+};
+
+export { postProduct, getAdminCreateProductPage, getViewProductPage };
