@@ -10,14 +10,13 @@ import {
   postUser,
 } from "../controllers/user.controller";
 import {
-  getAdminCreateProductPage,
   getAdminOrderPage,
   getAdminProductPage,
   getAdminUserPage,
   getDashBoardPage,
 } from "controllers/admin/dashboard.controller";
 import fileUploadMiddleware from "src/middleware/multer";
-import { postProduct } from "controllers/admin/product.controller";
+import { getAdminCreateProductPage, postProduct } from "controllers/admin/product.controller";
 
 const router = express.Router();
 

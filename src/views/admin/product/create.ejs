@@ -41,6 +41,10 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
+            <% errors.forEach(function(error) { %>
+            <div class="alert alert-danger mb-3"><%= error %></div>
+            <% }); %>
+
             <h1 class="mt-4">Create Product</h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
@@ -61,7 +65,7 @@
                       id="name"
                       name="name"
                       class="form-control"
-                      required
+                      value="<%= oldData.name %>"
                     />
                   </div>
                   <div class="mb-3">
@@ -71,7 +75,7 @@
                       id="price"
                       name="price"
                       class="form-control"
-                      required
+                      value="<%= oldData.price %>"
                     />
                   </div>
                   <div class="row">
@@ -81,7 +85,7 @@
                         type="text"
                         class="form-control"
                         name="detailDesc"
-                      ></textarea>
+                      > <%= oldData.detailDesc %> </textarea>
                     </div>
                     <div class="mb-3 col-6">
                       <label class="form-label">Short Description</label>
@@ -89,7 +93,7 @@
                         type="text"
                         class="form-control"
                         name="shortDesc"
-                      ></textarea>
+                      > <%= oldData.shortDesc %> </textarea>
                     </div>
                   </div>
 
@@ -100,7 +104,7 @@
                       type="number"
                       id="quantity"
                       name="quantity"
-                      required
+                      value="<%= oldData.quantity %>"
                     />
                   </div>
 
