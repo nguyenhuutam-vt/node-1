@@ -135,6 +135,48 @@ const getProductById = async (productId: number) => {
   return product;
 };
 
+const handleUpdateProduct = async (
+  productId: string,
+  data: {
+    name: string;
+    price: number;
+    image: string;
+    detailDesc: string;
+    shortDesc: string;
+    quantity: number;
+    // sold: number;
+    factory: string;
+    target: string;
+  }
+) => {
+  const editedProduct = await prisma.product.update({
+    where: {
+      id: Number(productId),
+    },
+    data: {
+      name: data.name,
+      price: Number(data.price),
+      ...(data.image !== undefined && { image: data.image }),
+      detailDesc: data.detailDesc,
+      shortDesc: data.shortDesc,
+      quantity: Number(data.quantity),
+      // sold: Number(data.sold),
+      factory: data.factory,
+      target: data.target,
+    },
+  });
+  return editedProduct;
+};
+
+const handleDeleteProduct = async (productId: string) => {
+  const deletedProduct = await prisma.product.delete({
+    where: {
+      id: Number(productId),
+    },
+  });
+  return deletedProduct;
+};
+
 export {
   handleCreateUser,
   getAllUser,
@@ -146,4 +188,6 @@ export {
   handleCreateProduct,
   getAllProduct,
   getProductById,
+  handleUpdateProduct,
+  handleDeleteProduct,
 };

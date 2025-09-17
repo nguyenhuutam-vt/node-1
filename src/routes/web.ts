@@ -16,7 +16,14 @@ import {
   getDashBoardPage,
 } from "controllers/admin/dashboard.controller";
 import fileUploadMiddleware from "src/middleware/multer";
-import { getAdminCreateProductPage, getViewProductPage, postProduct } from "controllers/admin/product.controller";
+import {
+  getAdminCreateProductPage,
+  getEditProductPage,
+  getViewProductPage,
+  postDeleteProduct,
+  postProduct,
+  postUpdateProduct,
+} from "controllers/admin/product.controller";
 
 const router = express.Router();
 
@@ -48,18 +55,21 @@ const webRoutes = (app: Express) => {
   );
 
   //product
-  router.get(
-    "/admin/create/product",
-    getAdminCreateProductPage
-  );
+  router.get("/admin/create/product", getAdminCreateProductPage);
   router.post(
     "/admin/create-product",
     fileUploadMiddleware("image", "images/product"),
     postProduct
   );
   router.get("/admin/view-product/:id", getViewProductPage);
+  router.get("/admin/edit-product/:id", getEditProductPage);
+  router.post(
+    "/admin/edit-product/:id",
+    fileUploadMiddleware("image", "images/product"),
+    postUpdateProduct
+  );
 
-
+    router.post("/admin/delete-product/:id", postDeleteProduct);
 
   //client
   router.get("/product/:id", getProductPage);

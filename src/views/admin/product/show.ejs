@@ -59,18 +59,27 @@
                   <td><%= product.target %></td>
                   <td>
                     <div style="display: flex; gap: 10px">
-                      <form method="GET" action="/admin/view-product/<%= product.id %>">
+                      <form
+                        method="GET"
+                        action="/admin/view-product/<%= product.id %>"
+                      >
                         <button type="submit" class="btn btn-warning btn-sm">
                           View
                         </button>
                       </form>
-                      <form method="GET">
+                      <form
+                        method="GET"
+                        action="/admin/edit-product/<%= product.id %>"
+                      >
                         <button type="submit" class="btn btn-success btn-sm">
                           Edit
                         </button>
                       </form>
 
-                      <form method="POST">
+                      <form
+                        method="POST"
+                        action="/admin/delete-product/<%= product.id %>"
+                      >
                         <button type="submit" class="btn btn-danger btn-sm">
                           Delete
                         </button>
