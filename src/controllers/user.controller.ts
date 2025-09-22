@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { getProducts } from "services/client/item.service";
 import {
   getAllRole,
   getAllUser,
@@ -9,7 +10,9 @@ import {
 } from "services/user.service";
 const getHomePage = async (req: Request, res: Response) => {
   // const users = await getAllUser();
-  return res.render("clinet/home/show.ejs" /*, { users }*/);
+  const products = await getProducts();
+  console.log(products);
+  return res.render("clinet/home/show.ejs", { products });
 };
 
 const getUserPage = async (req: Request, res: Response) => {
