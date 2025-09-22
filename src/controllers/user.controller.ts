@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getProducts } from "services/client/item.service";
+import { getProductById, getProducts } from "services/client/item.service";
 import {
   getAllRole,
   getAllUser,
@@ -56,7 +56,12 @@ const postUpdateUser = async (req: Request, res: Response) => {
 };
 
 const getProductPage = async (req: Request, res: Response) => {
-  return res.render("clinet/product/detail.ejs");
+  const { id } = req.params;
+  const productId = Number(id);
+  const product = await getProductById(productId);
+
+    const products = await getProducts();
+  return res.render("clinet/product/detail.ejs", { product, products });
 };
 
 export {

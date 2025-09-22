@@ -109,7 +109,10 @@
                         <div
                           class="p-4 border border-secondary border-top-0 rounded-bottom"
                         >
-                          <h4><%= product.name %></h4>
+
+                          <h4>
+                            <a href="/product/<%= product.id %>"><%= product.name %></a>
+                          </h4>
                           <p>
                             <%= product.shortDesc %>
                           </p>
@@ -117,7 +120,7 @@
                             class="d-flex justify-content-between flex-lg-wrap"
                           >
                             <p class="text-dark fs-5 fw-bold mb-0">
-                              $<%= new Intl.NumberFormat('vi-VN', {
+                              <%= new Intl.NumberFormat('vi-VN', {
     style: 'currency' , currency: 'VND'
     }).format(product.price) %>  
                             </p>
